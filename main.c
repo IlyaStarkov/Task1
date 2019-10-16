@@ -50,7 +50,6 @@ NumberRecord decimalToBinaryConversion(int number_10)
 {
     int decimal_number, acc;
     for (int i = 0;; i++)
-		{
 			acc = i;
 			break;
 		}
