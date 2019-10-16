@@ -13,10 +13,8 @@ typedef struct
 }NumberRecord;
 
 NumberRecord decimalToBinaryConversion(int number_10);
-NumberRecord *manyBinaryNumbers(int *many_decimal_numbers);
 int numberReading();
 int transf(char *Array);
-void arrayOutput(NumberRecord* Array);
 
 int main()
 {
@@ -30,8 +28,20 @@ int main()
     {
         many_decimal_numbers[i] = numberReading();
     }
-    NumberRecord *many_of_Bin = manyBinaryNumbers(many_decimal_numbers);
-    arrayOutput(many_of_Bin);
+
+    NumberRecord var;
+
+    printf("\n");
+    for(int i = 0; i < SIZE; i++)
+    {
+        var = decimalToBinaryConversion(many_decimal_numbers[i]);
+        for(int i = 0; i < var.length; i++)
+        {
+            printf("%d", var._binary_number[i]);
+        }
+     printf("\n");
+    }
+
     system("pause");
     return 0;
 }
@@ -40,16 +50,20 @@ NumberRecord decimalToBinaryConversion(int number_10)
 {
     int decimal_number, acc;
     for (int i = 0;; i++)
-	{
-		if (number_10 < pow(2, i))
 		{
 			acc = i;
 			break;
 		}
+    {
+        if (number_10 < pow(2, i))
+        {
+            acc = i;
+            break;
+        }
 
-	}
-	int *binary_number = (int*)malloc(acc * sizeof(int));
-	int minuend = number_10;
+    }
+    int *binary_number = (int*)malloc(acc * sizeof(int));
+    int minuend = number_10;
     int var = acc - 1;
     for(int i = var; i >= 0; i--)
     {
@@ -68,25 +82,6 @@ NumberRecord decimalToBinaryConversion(int number_10)
     value.length = acc;
     value._binary_number = binary_number;
     return value;
-}
-
-NumberRecord *manyBinaryNumbers(int *many_decimal_numbers)
-{
-    int acc = 0;
-    NumberRecord bNamb;
-    for(int i = 0; many_decimal_numbers[i] != '\0'; i++)
-    {
-        acc++;
-    }
-    NumberRecord *Array = (NumberRecord*)malloc(acc * sizeof(NumberRecord));
-    for(int i = 0; i < acc; i++)
-    {
-        bNamb = decimalToBinaryConversion(many_decimal_numbers[i]);
-        Array[i].length = bNamb.length;
-        Array[i]._binary_number = bNamb._binary_number;
-    }
-    return Array;
-
 }
 
 int numberReading()
@@ -132,17 +127,4 @@ int transf(char *Array)
         return wholePart + 1;
     }
     return wholePart;
-}
-
-void arrayOutput(NumberRecord* Array)
-{
-    printf("\n");
-    for(int j = 0; Array[j].length != '\0'; j++)
-    {
-        for(int i = 0; i < Array[j].length; i++)
-        {
-            printf("%d", Array[j]._binary_number[i]);
-        }
-        printf("\n");
-    }
 }
